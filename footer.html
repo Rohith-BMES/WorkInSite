@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer</title>
+
+    <!-- Font (safe if duplicated across pages) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Branding Colors */
+            --color-primary-yellow: rgb(250, 212, 39);
+            --color-secondary-green: rgb(79, 67, 15);
+            --color-text-dark: #333333;
+            --color-text-light: #666666;
+            --color-background-light: rgba(245, 245, 245);
+            --color-footer-bg: #f8f8f8;
+
+            /* Footer typography tokens (scoped via classes) */
+            --footer-text-size: 0.95rem;
+            --footer-text-line-height: 1.6;
+            --footer-title-size: 1rem;
+            --footer-logo-font-size: 1.25rem;
+            --footer-bottom-font-size: 0.8rem;
+        }
+
+        body {
+            font-family: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+        }
+
+        /* Footer Wrapper */
+        .footer-wrapper {
+            background-color: var(--color-footer-bg);
+            color: var(--color-text-light);
+            font-size: var(--footer-text-size);
+            line-height: var(--footer-text-line-height);
+        }
+
+        .footer-wrapper p,
+        .footer-wrapper li,
+        .footer-wrapper a {
+            font-size: var(--footer-text-size);
+            line-height: var(--footer-text-line-height);
+        }
+
+        /* Logo Styling */
+        .footer-logo-img {
+            background-color: var(--color-primary-yellow);
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            object-fit: contain;
+        }
+
+        .footer-logo-text {
+            font-size: var(--footer-logo-font-size);
+            font-weight: 700;
+            color: var(--color-text-dark);
+        }
+
+        /* Section Titles (Green with Yellow Underline) */
+        .footer-title {
+            color: var(--color-secondary-green);
+            font-size: var(--footer-title-size);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-title::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: var(--color-primary-yellow);
+            margin-top: 2px;
+        }
+
+        /* Link Hover Effects */
+        .footer-link {
+            color: var(--color-text-light);
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .footer-link:hover {
+            color: var(--color-text-dark);
+        }
+
+        /* Social Icons */
+        .social-icon-link {
+            color: var(--color-text-dark);
+            font-size: 20px;
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon-link:hover {
+            color: var(--color-primary-yellow);
+        }
+
+        /* Bottom Bar */
+        .footer-bottom {
+            background-color: var(--color-background-light);
+            color: var(--color-text-dark);
+        }
+
+        .footer-bottom p {
+            font-size: var(--footer-bottom-font-size);
+            line-height: 1.5;
+        }
+
+        /* ===========================
+           Responsive footer typography
+           =========================== */
+
+        /* ≤ 1199px */
+        @media (max-width: 1199px) {
+            :root {
+                --footer-text-size: 0.94rem;
+                --footer-title-size: 0.98rem;
+                --footer-logo-font-size: 1.2rem;
+                --footer-bottom-font-size: 0.78rem;
+            }
+        }
+
+        /* ≤ 991px (tablets) */
+        @media (max-width: 991px) {
+            :root {
+                --footer-text-size: 0.93rem;
+                --footer-title-size: 0.96rem;
+                --footer-logo-font-size: 1.18rem;
+                --footer-bottom-font-size: 0.76rem;
+            }
+        }
+
+        /* ≤ 767px (mobiles) */
+        @media (max-width: 767px) {
+            :root {
+                --footer-text-size: 0.92rem;
+                --footer-title-size: 0.95rem;
+                --footer-logo-font-size: 1.15rem;
+                --footer-bottom-font-size: 0.75rem;
+            }
+
+            .footer-wrapper {
+                text-align: center;
+            }
+
+            .footer-wrapper .pe-lg-5 {
+                padding-right: 0 !important;
+            }
+
+            .footer-wrapper .d-flex.gap-3 {
+                justify-content: center;
+            }
+        }
+
+        /* ≤ 575px */
+        @media (max-width: 575px) {
+            :root {
+                --footer-text-size: 0.9rem;
+                --footer-title-size: 0.94rem;
+                --footer-logo-font-size: 1.1rem;
+                --footer-bottom-font-size: 0.74rem;
+            }
+        }
+
+        /* ≤ 400px */
+        @media (max-width: 400px) {
+            :root {
+                --footer-text-size: 0.88rem;
+                --footer-title-size: 0.9rem;
+                --footer-logo-font-size: 1.05rem;
+                --footer-bottom-font-size: 0.72rem;
+            }
+        }
+
+        /* ≤ 320px */
+        @media (max-width: 320px) {
+            :root {
+                --footer-text-size: 0.86rem;
+                --footer-title-size: 0.88rem;
+                --footer-logo-font-size: 1.02rem;
+                --footer-bottom-font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <footer class="footer-wrapper pt-5">
+        <div class="container pb-4">
+            <div class="row">
+                
+                <div class="col-lg-5 col-md-12 mb-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="images/logo.png" alt="Logo" class="footer-logo-img me-2">
+                        <span class="footer-logo-text">WorkInSite</span>
+                    </div>
+                    <p class="mb-4 pe-lg-5">
+                        Professional workforce management tools designed for modern teams. Streamline your operations with our mobile-first solution.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="social-icon-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-1 d-none d-lg-block"></div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><a href="index.html#features" class="footer-link">Features</a></li>
+                        <li class="mb-2"><a href="index.html#download" class="footer-link">Download</a></li>
+                        <li class="mb-2"><a href="index.html#faq" class="footer-link">FAQs</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h4 class="footer-title">Support</h4>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><a href="index.html#faq" class="footer-link">Help Center</a></li>
+                        <li class="mb-2"><a href="wwa.html" class="footer-link">Who we are</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Privacy Policy</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="footer-bottom py-3">
+            <div class="container text-center">
+                <p class="mb-0">
+                    &copy; 2025 WorkInSite. All rights reserved. Developed by BM e-Solutions.
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

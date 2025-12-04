@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkInSite – Pricing Plans</title>
+
+    <!-- Basic SEO description -->
+    <meta name="description"
+    content="Compare WorkInSite pricing plans for construction management. Starter, Professional, and Enterprise plans for teams of all sizes.">
+    <link rel="icon" href="images/logo.png">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Roboto font (shared across site) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            /* Primary Branding Colors */
+            --color-primary-yellow: rgb(250, 212, 39);
+            --color-secondary-green: rgb(79, 67, 15);
+
+            /* Text & Neutral Colors */
+            --color-text-dark: #333333;
+            --color-text-light: #666666;
+            --color-text-white: #ffffff;
+            --color-background-light: rgba(245, 245, 245);
+            --color-shadow-base: rgba(0, 0, 0, 0.05);
+        }
+
+        /* ===========================
+           Global Typography (SEO-Friendly)
+           =========================== */
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: var(--color-background-light);
+            overflow-x: hidden;
+            color: var(--color-text-dark);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        h1 {
+            font-size: 3rem;
+            line-height: 1.25;
+            font-weight: 700;
+        }
+        h2 {
+            font-size: 2.25rem;
+            line-height: 1.3;
+            font-weight: 700;
+        }
+        h3 {
+            font-size: 1.5rem;
+            line-height: 1.35;
+            font-weight: 600;
+        }
+        h4 {
+            font-size: 1.25rem;
+            line-height: 1.35;
+            font-weight: 600;
+        }
+
+        p,
+        li {
+            font-size: 1.05rem;
+            line-height: 1.75;
+        }
+
+        /* Brand helpers */
+        .text-brand-dark { color: var(--color-text-dark); }
+        .text-brand-muted { color: var(--color-text-light); }
+        .bg-brand-yellow { background-color: var(--color-primary-yellow); }
+        .bg-brand-light { background-color: var(--color-background-light); }
+
+        /* Layout helpers */
+        .max-w-700 { max-width: 700px; }
+        .max-w-600 { max-width: 600px; }
+
+        /* ===========================
+           Pricing Page Specific Styles
+           =========================== */
+
+        .pricing-header {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+
+        .pricing-title {
+            color: var(--color-secondary-green);
+        }
+
+        .pricing-subtitle {
+            color: var(--color-text-dark);
+        }
+
+        .pricing-card {
+            background-color: var(--color-text-white);
+            opacity: 0;
+            transform: translateY(50px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px var(--color-shadow-base);
+            border-radius: 1.5rem;
+            border: 0;
+        }
+
+        .pricing-card.featured {
+            transform: scale(1.05) translateY(50px);
+            box-shadow: 0 10px 40px rgba(250,212,39,0.5);
+            border: 3px solid var(--color-primary-yellow);
+        }
+
+        .pricing-plan-name {
+            color: var(--color-text-dark);
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            color: rgb(102, 126, 234); /* keep accent blue for contrast */
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .pricing-period {
+            font-size: 1.1rem;
+            color: var(--color-text-dark);
+        }
+
+        .pricing-feature-item {
+            color: var(--color-text-light);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .pricing-feature-item:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-feature-item span {
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--color-text-dark);
+        }
+
+        .pricing-cta-button {
+            background-color: var(--color-primary-yellow);
+            color: var(--color-text-dark);
+            letter-spacing: 1px;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-cta-button:hover {
+            filter: brightness(0.95);
+        }
+
+        .pricing-comparison-section,
+        .pricing-faq {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .pricing-comparison-title,
+        .pricing-faq-title {
+            color: var(--color-secondary-green);
+        }
+
+        .pricing-comparison-item h3 {
+            color: var(--color-text-dark);
+        }
+
+        .pricing-comparison-item p,
+        .pricing-faq p {
+            color: var(--color-text-light);
+        }
+
+        /* CTA section */
+        .cta-section {
+            position: relative;
+            background-image: url('bg/banner1.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+        .cta-overlay {
+            background-color: rgba(255,255,255,0.7);
+            position:absolute;
+            inset:0;
+            z-index:1;
+        }
+        .cta-content {
+            position:relative;
+            z-index:2;
+        }
+
+        .btn-brand {
+            background-color: var(--color-primary-yellow);
+            color: var(--color-secondary-green);
+            border:none;
+            transition: all 0.3s ease;
+        }
+
+        /* ===========================
+           Responsive Font Guidelines
+           =========================== */
+
+        /* ≤ 1199px */
+        @media (max-width: 1199px) {
+            h1 { font-size: 2.7rem; }
+            h2 { font-size: 2.05rem; }
+            h3 { font-size: 1.4rem; }
+            p,
+            li {
+                font-size: 1.02rem;
+            }
+        }
+
+        /* ≤ 991px (tablets) */
+        @media (max-width: 991px) {
+            html { font-size: 15.5px; }
+
+            h1 { font-size: 2.4rem; }
+            h2 { font-size: 1.95rem; }
+            h3 { font-size: 1.35rem; }
+            p,
+            li {
+                font-size: 1rem;
+            }
+        }
+
+        /* ≤ 767px (mobile) */
+        @media (max-width: 767px) {
+            html { font-size: 15px; }
+
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.3rem; }
+            p,
+            li {
+                font-size: 0.98rem;
+            }
+        }
+
+        /* ≤ 575px (small mobile) */
+        @media (max-width: 575px) {
+            html { font-size: 14.5px; }
+
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.6rem; }
+            h3 { font-size: 1.2rem; }
+            p,
+            li {
+                font-size: 0.96rem;
+            }
+        }
+
+        /* ≤ 400px */
+        @media (max-width: 400px) {
+            html { font-size: 14px; }
+
+            h1 { font-size: 1.6rem; }
+            h2 { font-size: 1.45rem; }
+            p,
+            li {
+                font-size: 0.94rem;
+            }
+        }
+
+        /* ≤ 320px */
+        @media (max-width: 320px) {
+            html { font-size: 13.5px; }
+
+            h1 { font-size: 1.45rem; }
+            h2 { font-size: 1.3rem; }
+            p,
+            li {
+                font-size: 0.9rem;
+            }
+        }
+        /* WhatsApp hover & chat text reveal */
+        .whatsapp-button:hover {
+        background-color: #128C7E !important;
+        transform: scale(1.05) !important;
+        }
+
+        .chat-text {
+        width: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: all 0.3s;
+        white-space: nowrap;
+        font-size: 1rem;
+        }
+
+        .whatsapp-button:hover .chat-text {
+        width: auto;
+        opacity: 1;
+        margin-left: 8px;
+        }
+        /* Scroll-to-top state */
+        .scroll-to-top.show {
+        display: flex !important;
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="head_content"></div>
+
+<!-- MAIN CONTAINER -->
+<div class="container py-5">
+    <!-- Header -->
+    <header class="pricing-header text-center mb-5">
+        <h1 class="fw-bold mb-2 pricing-title">
+            WorkInSite Pricing Plan
+        </h1>
+        <p class="mt-3 mb-0 fw-normal pricing-subtitle max-w-700 mx-auto">
+            Choose the perfect plan for your construction management needs
+        </p>
+    </header>
+
+    <!-- Pricing Cards -->
+    <div class="row justify-content-center mb-5 gx-4 gy-5">
+        <!-- Starter -->
+        <div class="col-12 col-md-6 col-lg-4 d-flex" data-delay="0">
+            <div class="card pricing-card w-100"
+                 data-animate="scroll">
+                <!-- Top bar -->
+                <div style="height: 5px; width: 100%; background: linear-gradient(90deg, rgb(102,126,234), rgb(118,75,162)); position:absolute; top:0; left:0;"></div>
+
+                <div class="d-flex flex-column p-4 p-lg-5">
+                    <h4 class="fw-semibold mb-2 pricing-plan-name">
+                        Starter
+                    </h4>
+                    <p class="text-brand-muted mb-4 fs-6">
+                        Perfect for small teams and individual contractors
+                    </p>
+
+                    <div class="mb-1">
+                        <span class="pricing-price">₹29</span>
+                        <span class="ms-1 fw-normal pricing-period">
+                            /mo
+                        </span>
+                    </div>
+                    <p class="text-brand-muted mb-4 fs-6">
+                        Billed monthly
+                    </p>
+
+                    <ul class="mb-4 flex-grow-1 list-unstyled">
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            Up to 5 projects
+                        </li>
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            10 team members
+                        </li>
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            Basic reporting
+                        </li>
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            Mobile app access
+                        </li>
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            Email support
+                        </li>
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            5GB storage
+                        </li>
+                    </ul>
+
+                    <button class="btn btn-lg rounded-pill mt-auto pricing-cta-button text-uppercase fw-bold">
+                        Get Started
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Professional (Featured) -->
+        <div class="col-12 col-md-6 col-lg-4 d-flex" data-delay="200">
+            <div class="card pricing-card featured w-100"
+                 data-animate="scroll">
+                <!-- Top bar -->
+                <div style="height: 8px; width: 100%; background: var(--color-primary-yellow); position:absolute; top:0; left:0;"></div>
+
+                <div class="d-flex flex-column p-4 p-lg-5">
+                    <span class="mb-2 px-3 py-1 rounded-pill text-uppercase fw-semibold bg-brand-yellow"
+                          style="display:inline-block; color: var(--color-text-dark); font-size:0.9rem;">
+                        Most Popular
+                    </span>
+
+                    <h4 class="fw-semibold mb-2 pricing-plan-name">
+                        Professional
+                    </h4>
+                    <p class="text-brand-muted mb-4 fs-6">
+                        Ideal for growing construction businesses
+                    </p>
+
+                    <div class="mb-1">
+                        <span class="pricing-price">₹79</span>
+                        <span class="ms-1 fw-normal pricing-period">
+                            /mo
+                        </span>
+                    </div>
+                    <p class="text-brand-muted mb-4 fs-6">
+                        Billed monthly
+                    </p>
+
+                    <ul class="mb-4 flex-grow-1 list-unstyled">
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            Unlimited projects
+                        </li>
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            50 team members
+                        </li>
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            Advanced analytics
+                        </li>
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            Mobile app access
+                        </li>
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            Priority support
+                        </li>
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            100GB storage
+                        </li>
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            Custom integrations
+                        </li>
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            Time tracking
+                        </li>
+                    </ul>
+
+                    <button class="btn btn-lg rounded-pill mt-auto pricing-cta-button text-uppercase fw-bold">
+                        Get Started
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="col-12 col-md-6 col-lg-4 d-flex" data-delay="400">
+            <div class="card pricing-card w-100"
+                 data-animate="scroll">
+                <!-- Top bar -->
+                <div style="height: 5px; width: 100%; background: linear-gradient(90deg, rgb(102,126,234), rgb(118,75,162)); position:absolute; top:0; left:0;"></div>
+
+                <div class="d-flex flex-column p-4 p-lg-5">
+                    <h4 class="fw-semibold mb-2 pricing-plan-name">
+                        Enterprise
+                    </h4>
+                    <p class="text-brand-muted mb-4 fs-6">
+                        For large organizations with complex needs
+                    </p>
+
+                    <div class="mb-1">
+                        <span class="pricing-price">₹199</span>
+                        <span class="ms-1 fw-normal pricing-period">
+                            /mo
+                        </span>
+                    </div>
+                    <p class="text-brand-muted mb-4 fs-6">
+                        Billed monthly
+                    </p>
+
+                    <ul class="mb-4 flex-grow-1 list-unstyled">
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            Unlimited everything
+                        </li>
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            Unlimited team members
+                        </li>
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            AI-powered insights
+                        </li>
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            White-label options
+                        </li>
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            24/7 dedicated support
+                        </li>
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            Unlimited storage
+                        </li>
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            API access
+                        </li>
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            Custom training
+                        </li>
+                        <li class="py-2 fs-6 pricing-feature-item">
+                            <span>✓</span>
+                            SLA guarantee
+                        </li>
+                    </ul>
+
+                    <button class="btn btn-lg rounded-pill mt-auto pricing-cta-button text-uppercase fw-bold">
+                        Contact Sales
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- All Plans Include -->
+    <div class="mt-5 rounded-4 shadow-lg bg-white pricing-comparison-section"
+         data-animate="scroll">
+        <div class="p-4 p-lg-5">
+            <h2 class="text-center mb-5 fw-bold pricing-comparison-title fs-3">
+                All Plans Include
+            </h2>
+            <div class="row text-center g-4">
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="h-100 pricing-comparison-item p-3 rounded-3"
+                         style="transition: all 0.3s ease;">
+                        <div class="mb-2" style="font-size: 2rem;">🔒</div>
+                        <h3 class="h5 fw-bold mb-2">
+                            Secure
+                        </h3>
+                        <p class="mb-0 fs-6">
+                            Bank-level encryption and data protection
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="h-100 pricing-comparison-item p-3 rounded-3"
+                         style="transition: all 0.3s ease;">
+                        <div class="mb-2" style="font-size: 2rem;">📱</div>
+                        <h3 class="h5 fw-bold mb-2">
+                            Mobile Ready
+                        </h3>
+                        <p class="mb-0 fs-6">
+                            iOS and Android apps included
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="h-100 pricing-comparison-item p-3 rounded-3"
+                         style="transition: all 0.3s ease;">
+                        <div class="mb-2" style="font-size: 2rem;">🔄</div>
+                        <h3 class="h5 fw-bold mb-2">
+                            Real-time Sync
+                        </h3>
+                        <p class="mb-0 fs-6">
+                            Instant updates across all devices
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="h-100 pricing-comparison-item p-3 rounded-3"
+                         style="transition: all 0.3s ease;">
+                        <div class="mb-2" style="font-size: 2rem;">🎯</div>
+                        <h3 class="h5 fw-bold mb-2">
+                            Easy Setup
+                        </h3>
+                        <p class="mb-0 fs-6">
+                            Get started in under 5 minutes
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="mt-5 mb-5 rounded-4 shadow-lg bg-white pricing-faq"
+         data-animate="scroll">
+        <div class="p-4 p-lg-5">
+            <h2 class="text-center mb-5 fw-bold pricing-faq-title fs-3">
+                Frequently Asked Questions
+            </h2>
+
+            <div>
+                <div class="mb-4 pb-4 border-bottom">
+                    <div class="mb-2 fs-6 fw-semibold text-brand-dark">
+                        Can I change plans later?
+                    </div>
+                    <div class="fs-6 text-brand-muted">
+                        Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately, and we'll
+                        prorate any charges.
+                    </div>
+                </div>
+
+                <div class="mb-4 pb-4 border-bottom">
+                    <div class="mb-2 fs-6 fw-semibold text-brand-dark">
+                        Is there a free trial?
+                    </div>
+                    <div class="fs-6 text-brand-muted">
+                        Absolutely! All plans come with a 14-day free trial. No credit card required to start.
+                    </div>
+                </div>
+
+                <div class="mb-4 pb-4 border-bottom">
+                    <div class="mb-2 fs-6 fw-semibold text-brand-dark">
+                        What payment methods do you accept?
+                    </div>
+                    <div class="fs-6 text-brand-muted">
+                        We accept all major credit cards, PayPal, and wire transfers for Enterprise plans.
+                    </div>
+                </div>
+
+                <div>
+                    <div class="mb-2 fs-6 fw-semibold text-brand-dark">
+                        Do you offer discounts for annual billing?
+                    </div>
+                    <div class="fs-6 text-brand-muted">
+                        Yes! Save 20% when you pay annually. Contact our sales team for more details.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<section class="cta-section py-5">
+    <div class="cta-overlay"></div>
+    <div class="container position-relative text-center py-5 cta-content">
+        <h2 class="fw-bold mb-3 fs-3 text-brand-dark">
+            Ready to Transform Your Workplace?
+        </h2>
+        <p class="lead mb-4 fs-5 fw-normal text-brand-dark max-w-600 mx-auto">
+            Join hundreds of organizations that trust WorkInsite to power their success
+        </p>
+        <a href="index.html#contact"
+           class="btn btn-lg shadow btn-brand fw-bold text-decoration-none px-4 py-3 rounded-pill d-inline-block">
+            Get in Touch
+        </a>
+    </div>
+</section>
+
+<!-- Whatsapp Section -->
+    <a href="https://wa.me/YOUR_WHATSAPP_NUMBER"
+       class="whatsapp-button d-flex align-items-center position-fixed"
+       target="_blank"
+       style="bottom:20px;right:20px;background-color:#25D366;color:#ffffff;padding:15px;border-radius:50px;box-shadow:0 4px 8px rgba(0,0,0,0.2);text-decoration:none;font-size:1.5rem;z-index:998;transition:all 0.3s;">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+        <span class="chat-text">Chat with us!</span>
+    </a>
+
+    <button class="scroll-to-top d-none align-items-center justify-content-center position-fixed border-0 rounded-circle"
+            id="scrollToTopBtn" aria-label="Scroll to top"
+            style="bottom:90px;right:20px;width:50px;height:50px;background:var(--color-secondary-green);color:#ffffff;cursor:pointer;font-size:20px;box-shadow:0 4px 12px rgba(0,0,0,0.05);z-index:999;transition:all 0.3s ease;opacity:0;transform:translateY(20px);">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+<div id="foot_content"></div>
+
+<script src="js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Header fade-down animation
+    window.addEventListener('DOMContentLoaded', function () {
+        const header = document.querySelector('.pricing-header');
+        if (header) {
+            setTimeout(() => {
+                header.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                header.style.opacity = '1';
+                header.style.transform = 'translateY(0)';
+            }, 100);
+        }
+    });
+
+    // Scroll reveal animation for cards/sections
+    const observerOptions = {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const element = entry.target;
+                const delayAttrParent = element.closest('[data-delay]');
+                const delay = parseInt((delayAttrParent && delayAttrParent.getAttribute('data-delay')) || '0', 10);
+
+                setTimeout(() => {
+                    element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                    element.style.opacity = '1';
+
+                    let baseTransform = 'translateY(0)';
+                    if (element.classList.contains('pricing-card') && element.classList.contains('featured')) {
+                        baseTransform = 'scale(1.05) translateY(0)';
+                    }
+                    element.dataset.baseTransform = baseTransform;
+                    element.style.transform = baseTransform;
+                }, delay);
+
+                observer.unobserve(element);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('[data-animate="scroll"]').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Hover effects for pricing cards
+    const pricingCards = document.querySelectorAll('.pricing-card');
+    pricingCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            const isMobile = window.innerWidth <= 768;
+            if (isMobile) {
+                card.style.transform = 'translateY(-5px) scale(1.01)';
+            } else {
+                if (card.classList.contains('featured')) {
+                    card.style.transform = 'scale(1.08) translateY(-10px)';
+                } else {
+                    card.style.transform = 'translateY(-10px) scale(1.02)';
+                }
+            }
+            card.style.boxShadow = '0 15px 50px rgba(0,0,0,0.05)';
+        });
+
+        card.addEventListener('mouseleave', () => {
+            const base = card.dataset.baseTransform || (card.classList.contains('featured')
+                ? 'scale(1.05) translateY(0)'
+                : 'translateY(0)');
+            card.style.transform = base;
+
+            if (card.classList.contains('featured')) {
+                card.style.boxShadow = '0 10px 40px rgba(250,212,39,0.5)';
+            } else {
+                card.style.boxShadow = '0 10px 40px var(--color-shadow-base)';
+            }
+        });
+    });
+
+    // Hover effects for "All Plans Include" cards
+    const comparisonItems = document.querySelectorAll('.pricing-comparison-item');
+    comparisonItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            item.style.boxShadow = '0 15px 25px rgba(0,0,0,0.1)';
+            item.style.transform = 'translateY(-5px)';
+        });
+        item.addEventListener('mouseleave', () => {
+            item.style.boxShadow = 'none';
+            item.style.transform = 'translateY(0)';
+        });
+    });
+
+    // Hover + click for pricing CTA buttons
+    const ctaButtons = document.querySelectorAll('.pricing-cta-button');
+    ctaButtons.forEach(button => {
+        button.addEventListener('mouseenter', () => {
+            if (window.innerWidth > 768) {
+                button.style.transform = 'translateY(-2px)';
+                button.style.boxShadow = '0 5px 20px rgba(0,0,0,0.05)';
+                button.style.filter = 'brightness(0.9)';
+            }
+        });
+        button.addEventListener('mouseleave', () => {
+            button.style.transform = 'translateY(0)';
+            button.style.boxShadow = 'none';
+            button.style.filter = 'none';
+        });
+
+        button.addEventListener('click', function () {
+            const card = this.closest('.card');
+            const planName = card ? card.querySelector('.pricing-plan-name').textContent.trim() : 'a selected';
+            alert(`Thank you for choosing the ${planName} plan! Redirecting to checkout...`);
+        });
+    });
+
+    // Hover effects for CTA brand button
+    const brandBtn = document.querySelector('.btn-brand');
+    if (brandBtn) {
+        brandBtn.addEventListener('mouseenter', () => {
+            brandBtn.style.backgroundColor = 'rgb(230, 194, 0)';
+            brandBtn.style.color = 'var(--color-secondary-green)';
+            brandBtn.style.transform = 'translateY(-3px)';
+            brandBtn.style.boxShadow = '0 10px 20px rgba(250,212,39,0.4)';
+        });
+        brandBtn.addEventListener('mouseleave', () => {
+            brandBtn.style.backgroundColor = 'var(--color-primary-yellow)';
+            brandBtn.style.color = 'var(--color-secondary-green)';
+            brandBtn.style.transform = 'translateY(0)';
+            brandBtn.style.boxShadow = 'none';
+        });
+    }
+
+    // Smooth scroll
+    document.documentElement.style.scrollBehavior = 'smooth';
+    // ========== SCROLL TO TOP BUTTON ==========
+(function () {
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    if (!scrollToTopBtn) return;
+
+    function toggleScrollButton() {
+        if (window.pageYOffset > 300) {
+            scrollToTopBtn.classList.add('show');
+        } else {
+            scrollToTopBtn.classList.remove('show');
+        }
+    }
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    window.addEventListener('scroll', toggleScrollButton);
+    scrollToTopBtn.addEventListener('click', scrollToTop);
+
+    toggleScrollButton();
+})();
+</script>
+
+<script type="text/javascript">
+    $('#head_content').load('header.html');
+    $('#foot_content').load('footer.html');
+</script>
+
+</body>
+</html>

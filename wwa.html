@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkInsite</title>
+    <link rel="icon" href="images/logo.png">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Roboto font to match other pages -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Brand Colors */
+            --brand-yellow: rgb(250, 212, 39);
+            --brand-green: rgb(79, 67, 15);
+            --brand-bg-light: rgba(245, 245, 245);
+            --brand-gradient: linear-gradient(135deg, #FFFACD 0%, rgba(245, 245, 245) 100%);
+
+            /* Base typography tokens */
+            --font-size-base: 1rem;
+            --line-height-base: 1.7;
+
+            /* Font Guidelines (same system as pricing page) */
+            --hero-font-size: 3rem;          /* H1 */
+            --sub-head-font-size: 2rem;      /* H2 */
+            --description-font-size: 1.1rem; /* Body text */
+            --description-line-height: 1.6;
+            --bold-font-weight: 700;
+            --button-font-size: 1.1rem;
+
+            /* Optional: stat/number emphasis */
+            --stat-number-font-size: 2.5rem;
+        }
+
+        body {
+            font-family: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background-color: var(--brand-bg-light);
+            color: #333333;
+        }
+
+        .text-brand-dark { color: #333; }
+        .text-brand-muted { color: #666; }
+
+        /* Typography scoped to this page content */
+        .wwa-page {
+            font-size: var(--font-size-base);
+            line-height: var(--line-height-base);
+        }
+
+        .wwa-page h1 {
+            font-size: var(--hero-font-size);
+            line-height: 1.2;
+            font-weight: var(--bold-font-weight);
+        }
+
+        .wwa-page h2 {
+            font-size: var(--sub-head-font-size);
+            line-height: 1.3;
+            font-weight: var(--bold-font-weight);
+        }
+
+        .wwa-page h3 {
+            font-size: 1.3rem;
+            line-height: 1.35;
+            font-weight: 600;
+        }
+
+        .wwa-page p,
+        .wwa-page li {
+            font-size: var(--description-font-size);
+            line-height: var(--description-line-height);
+            font-weight: 400;
+        }
+
+        .wwa-page .btn-brand {
+            font-size: var(--button-font-size);
+            font-weight: var(--bold-font-weight);
+        }
+
+        .wwa-page .wwa-stat-number {
+            font-size: var(--stat-number-font-size);
+            font-weight: var(--bold-font-weight);
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Scroll fade */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .animate-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* WhatsApp hover & chat text reveal */
+        .whatsapp-button:hover {
+        background-color: #128C7E !important;
+        transform: scale(1.05) !important;
+        }
+
+        .chat-text {
+        width: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: all 0.3s;
+        white-space: nowrap;
+        font-size: 1rem;
+        }
+
+        .whatsapp-button:hover .chat-text {
+        width: auto;
+        opacity: 1;
+        margin-left: 8px;
+        }
+        /* Scroll-to-top state */
+        .scroll-to-top.show {
+        display: flex !important;
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        }
+
+        /* Hero background movement */
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* ====================================
+           Responsive Font Guidelines (All modes)
+           ==================================== */
+
+        /* ≤ 1199px – large tablets / small laptops */
+        @media (max-width: 1199px) {
+            :root {
+                --hero-font-size: 2.7rem;
+                --sub-head-font-size: 1.9rem;
+                --description-font-size: 1.06rem;
+                --button-font-size: 1.06rem;
+                --stat-number-font-size: 2.3rem;
+            }
+        }
+
+        /* ≤ 991px – tablets */
+        @media (max-width: 991px) {
+            :root {
+                --hero-font-size: 2.4rem;
+                --sub-head-font-size: 1.8rem;
+                --description-font-size: 1.03rem;
+                --button-font-size: 1.03rem;
+                --stat-number-font-size: 2.1rem;
+            }
+        }
+
+        /* ≤ 767px – mobiles */
+        @media (max-width: 767px) {
+            :root {
+                --hero-font-size: 2.1rem;
+                --sub-head-font-size: 1.6rem;
+                --description-font-size: 1rem;
+                --button-font-size: 1rem;
+                --stat-number-font-size: 1.9rem;
+            }
+        }
+
+        /* ≤ 575px – small mobiles */
+        @media (max-width: 575px) {
+            :root {
+                --hero-font-size: 1.9rem;
+                --sub-head-font-size: 1.5rem;
+                --description-font-size: 0.96rem;
+                --button-font-size: 0.96rem;
+                --stat-number-font-size: 1.75rem;
+            }
+        }
+
+        /* ≤ 400px – extra small devices */
+        @media (max-width: 400px) {
+            :root {
+                --hero-font-size: 1.7rem;
+                --sub-head-font-size: 1.35rem;
+                --description-font-size: 0.94rem;
+                --button-font-size: 0.94rem;
+                --stat-number-font-size: 1.6rem;
+            }
+        }
+
+        /* ≤ 320px – ultra small */
+        @media (max-width: 320px) {
+            :root {
+                --hero-font-size: 1.5rem;
+                --sub-head-font-size: 1.25rem;
+                --description-font-size: 0.9rem;
+                --button-font-size: 0.9rem;
+                --stat-number-font-size: 1.45rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="head_content"></div>
+
+    <!-- Scoped main content so header/footer typography remain independent -->
+    <main class="wwa-page">
+
+        <!-- HERO SECTION -->
+        <header class="d-flex align-items-center justify-content-center py-5"
+                style="background: var(--brand-gradient); position: relative; overflow: hidden; min-height: 400px;">
+            <!-- Moving background pattern -->
+            <div class="hero-bg-pattern"
+                 style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background-size: 50px 50px; opacity: 0.1; animation: moveBackground 20s linear infinite; z-index: 0;">
+            </div>
+
+            <div class="container text-center position-relative mt-5"
+                 style="z-index: 1;">
+                <h1 class="fw-bold mb-3 animate-on-scroll text-brand-dark">
+                    Who We Are
+                </h1>
+                <p class="mb-5 animate-on-scroll text-brand-muted">
+                    Transforming workplaces through innovative solutions and dedicated service
+                </p>
+
+                <div class="scroll-indicator mt-5 d-inline-block">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none"
+                         stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+                    </svg>
+                </div>
+            </div>
+        </header>
+
+        <!-- MISSION SECTION -->
+        <section class="py-5 bg-light">
+            <div class="container py-4">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <h2 class="fw-bold mb-4 text-brand-dark">
+                            Our Mission
+                        </h2>
+                        <p class="text-brand-muted lh-lg">
+                            At WorkInsite, we're dedicated to revolutionizing the way organizations manage their workforce and operations.
+                            Our mission is to empower businesses with cutting-edge technology that streamlines processes, enhances productivity,
+                            and creates meaningful workplace experiences. We believe that when people have the right tools, they can achieve
+                            extraordinary results.
+                        </p>
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-5">
+                    <!-- [Image of corporate mission and vision strategic map] -->
+                </div>
+            </div>
+        </section>
+
+        <!-- CORE VALUES SECTION -->
+        <section class="py-5">
+            <div class="container py-4">
+                <h2 class="text-center fw-bold mb-5 text-brand-dark">
+                    Our Core Values
+                </h2>
+
+                <div class="row g-4">
+                    <!-- Value card 1 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm text-center p-4 value-card animate-on-scroll"
+                             style="border: none; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                            <div class="card-body">
+                                <div class="mb-3" style="font-size: 2.5rem;">🎯</div>
+                                <h3 class="fw-bold mb-3 text-brand-dark">
+                                    Innovation
+                                </h3>
+                                <p class="text-brand-muted mb-0">
+                                    We constantly push boundaries and embrace new technologies to deliver solutions that stay ahead of the curve.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Value card 2 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm text-center p-4 value-card animate-on-scroll"
+                             style="border: none; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                            <div class="card-body">
+                                <div class="mb-3" style="font-size: 2.5rem;">🤝</div>
+                                <h3 class="fw-bold mb-3 text-brand-dark">
+                                    Collaboration
+                                </h3>
+                                <p class="text-brand-muted mb-0">
+                                    We believe in the power of teamwork and foster a culture where ideas flourish through partnership.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Value card 3 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm text-center p-4 value-card animate-on-scroll"
+                             style="border: none; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                            <div class="card-body">
+                                <div class="mb-3" style="font-size: 2.5rem;">⭐</div>
+                                <h3 class="fw-bold mb-3 text-brand-dark">
+                                    Excellence
+                                </h3>
+                                <p class="text-brand-muted mb-0">
+                                    We strive for excellence in everything we do, ensuring quality and reliability in every interaction.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Value card 4 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm text-center p-4 value-card animate-on-scroll"
+                             style="border: none; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                            <div class="card-body">
+                                <div class="mb-3" style="font-size: 2.5rem;">🔒</div>
+                                <h3 class="fw-bold mb-3 text-brand-dark">
+                                    Integrity
+                                </h3>
+                                <p class="text-brand-muted mb-0">
+                                    We operate with transparency and honesty, building trust with our clients and partners every day.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Value card 5 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm text-center p-4 value-card animate-on-scroll"
+                             style="border: none; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                            <div class="card-body">
+                                <div class="mb-3" style="font-size: 2.5rem;">🚀</div>
+                                <h3 class="fw-bold mb-3 text-brand-dark">
+                                    Growth
+                                </h3>
+                                <p class="text-brand-muted mb-0">
+                                    We're committed to continuous improvement and supporting the growth of our clients and team members.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Value card 6 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm text-center p-4 value-card animate-on-scroll"
+                             style="border: none; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                            <div class="card-body">
+                                <div class="mb-3" style="font-size: 2.5rem;">💡</div>
+                                <h3 class="fw-bold mb-3 text-brand-dark">
+                                    Creativity
+                                </h3>
+                                <p class="text-brand-muted mb-0">
+                                    We encourage creative thinking and innovative approaches to solve complex workplace challenges.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- IMPACT / STATS SECTION -->
+        <section class="py-5" style="background: var(--brand-gradient);">
+            <div class="container py-4 text-center">
+                <h2 class="fw-bold mb-3 text-brand-dark">
+                    Our Impact
+                </h2>
+                <p class="mb-5 text-brand-muted" style="opacity: 0.75;">
+                    Numbers that reflect our commitment to excellence
+                </p>
+
+                <!-- [Image of company year over year growth chart] -->
+
+                <div class="row g-4 justify-content-center mt-3">
+                    <div class="col-6 col-md-3">
+                        <div class="h-100 p-4"
+                             style="background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-radius: 10px; border: none;">
+                            <span class="d-block fw-bold mb-2 wwa-stat-number"
+                                  data-target="300">
+                                0
+                            </span>
+                            <span class="text-brand-muted">
+                                Happy Clients
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="h-100 p-4"
+                             style="background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-radius: 10px; border: none;">
+                            <span class="d-block fw-bold mb-2 wwa-stat-number"
+                                  data-target="250">
+                                0
+                            </span>
+                            <span class="text-brand-muted">
+                                Projects
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="h-100 p-4"
+                             style="background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-radius: 10px; border: none;">
+                            <span class="d-block fw-bold mb-2 wwa-stat-number"
+                                  data-target="20">
+                                0
+                            </span>
+                            <span class="text-brand-muted">
+                                Team Members
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="h-100 p-4"
+                             style="background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-radius: 10px; border: none;">
+                            <span class="d-block fw-bold mb-2 wwa-stat-number"
+                                  data-target="10">
+                                0
+                            </span>
+                            <span class="text-brand-muted">
+                                Years
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA SECTION -->
+        <section class="py-5"
+                 style="position: relative; background-image: url('bg/banner1.jpg'); background-attachment: fixed; background-size: cover; background-position: center;">
+            <div class="cta-overlay"
+                 style="background-color: rgba(255, 255, 255, 0.7); position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
+            </div>
+            <div class="container position-relative text-center py-5"
+                 style="z-index: 2;">
+                <h2 class="fw-bold mb-3 text-brand-dark">
+                    Ready to Transform Your Workplace?
+                </h2>
+                <p class="mb-4 text-brand-dark">
+                    Join hundreds of organizations that trust WorkInsite to power their success
+                </p>
+                <a href="index.html#contact"
+                   class="btn btn-lg shadow btn-brand text-decoration-none px-4 py-3 rounded-pill"
+                   style="background-color: rgb(250, 212, 39); color: var(--brand-green); border: none; transition: all 0.3s ease; display: inline-block;">
+                    Get in Touch
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Whatsapp Section -->
+    <a href="https://wa.me/YOUR_WHATSAPP_NUMBER"
+       class="whatsapp-button d-flex align-items-center position-fixed"
+       target="_blank"
+       style="bottom:20px;right:20px;background-color:#25D366;color:#ffffff;padding:15px;border-radius:50px;box-shadow:0 4px 8px rgba(0,0,0,0.2);text-decoration:none;font-size:1.5rem;z-index:998;transition:all 0.3s;">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+        <span class="chat-text">Chat with us!</span>
+    </a>
+
+    <button class="scroll-to-top d-none align-items-center justify-content-center position-fixed border-0 rounded-circle"
+            id="scrollToTopBtn" aria-label="Scroll to top"
+            style="bottom:90px;right:20px;width:50px;height:50px;background:var(--color-secondary-green);color:#ffffff;cursor:pointer;font-size:20px;box-shadow:0 4px 12px rgba(0,0,0,0.05);z-index:999;transition:all 0.3s ease;opacity:0;transform:translateY(20px);">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <div id="foot_content"></div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Number counters
+        function animateCounter(element) {
+            const target = parseInt(element.getAttribute('data-target'));
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            let current = 0;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    element.textContent = Math.floor(current) + '+';
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target + '+';
+                }
+            };
+            updateCounter();
+        }
+
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.target.classList.contains('wwa-stat-number')) {
+                    animateCounter(entry.target);
+                    statObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.wwa-stat-number').forEach(stat => statObserver.observe(stat));
+
+        // Scroll fade-in
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('animate-visible');
+                    }, 100);
+                    scrollObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => scrollObserver.observe(el));
+
+        // Value card hover (replaces CSS :hover)
+        document.querySelectorAll('.value-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px)';
+                card.style.boxShadow = '0 1rem 3rem rgba(0,0,0,.175)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '0 .125rem .25rem rgba(0,0,0,.075)';
+            });
+        });
+
+        // CTA button hover (replaces CSS :hover)
+        const brandBtn = document.querySelector('.btn-brand');
+        if (brandBtn) {
+            brandBtn.addEventListener('mouseenter', () => {
+                brandBtn.style.backgroundColor = '#e6c200';
+                brandBtn.style.color = 'var(--brand-green)';
+                brandBtn.style.transform = 'translateY(-3px)';
+                brandBtn.style.boxShadow = '0 10px 20px rgba(250, 212, 39, 0.4)';
+            });
+            brandBtn.addEventListener('mouseleave', () => {
+                brandBtn.style.backgroundColor = 'rgb(250, 212, 39)';
+                brandBtn.style.color = 'var(--brand-green)';
+                brandBtn.style.transform = 'translateY(0)';
+                brandBtn.style.boxShadow = '0 .5rem 1rem rgba(0,0,0,.15)';
+            });
+        }
+        // ========== SCROLL TO TOP BUTTON ==========
+(function () {
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    if (!scrollToTopBtn) return;
+
+    function toggleScrollButton() {
+        if (window.pageYOffset > 300) {
+            scrollToTopBtn.classList.add('show');
+        } else {
+            scrollToTopBtn.classList.remove('show');
+        }
+    }
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    window.addEventListener('scroll', toggleScrollButton);
+    scrollToTopBtn.addEventListener('click', scrollToTop);
+
+    toggleScrollButton();
+})();
+    </script>
+
+    <script>
+        // Load Header/Footer
+        $('#head_content').load('header.html');
+        $('#foot_content').load('footer.html');
+    </script>
+</body>
+</html>

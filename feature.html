@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkinSite – Features & Reports</title>
+
+    <!-- Basic SEO description -->
+    <meta name="description" content="Explore WorkinSite features for site management, attendance tracking, and advanced reporting with mobile-first construction workforce tools.">
+
+    <link rel="icon" href="images/logo.png">
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <!-- Roboto font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Primary Branding Colors */
+            --color-primary-yellow: rgb(250, 212, 39);
+            --color-secondary-green: rgb(79, 67, 15);
+            
+            /* Text & Neutral Colors */
+            --color-text-dark: #333333;
+            --color-text-light: #666666;
+            --color-text-white: #ffffff;
+            --color-background-light: rgba(245, 245, 245);
+            --color-surface-light-yellow: #FFFACD;
+            --color-shadow-base: rgba(0, 0, 0, 0.05);
+        }
+
+        /* ===========================
+           Global Typography (SEO-Friendly)
+           =========================== */
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--color-background-light);
+            color: var(--color-text-dark);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        h1 {
+            font-size: 3rem;
+            line-height: 1.25;
+            font-weight: 700;
+        }
+        h2 {
+            font-size: 2.25rem;
+            line-height: 1.3;
+            font-weight: 700;
+        }
+        h3 {
+            font-size: 1.5rem;
+            line-height: 1.35;
+            font-weight: 600;
+        }
+        h4 {
+            font-size: 1.25rem;
+            line-height: 1.35;
+            font-weight: 600;
+        }
+
+        p,
+        li {
+            font-size: 1.05rem;
+            line-height: 1.75;
+        }
+
+        /* Brand helpers */
+        .text-brand-green { color: var(--color-secondary-green); }
+        .text-brand-dark { color: var(--color-text-dark); }
+        .bg-brand-yellow { background-color: var(--color-primary-yellow); }
+        .bg-brand-light { background-color: var(--color-background-light); }
+
+        .max-w-700 { max-width: 700px; }
+        .max-w-600 { max-width: 600px; }
+
+        /* Tabs */
+        .feature-tab {
+            box-shadow: 0 2px 8px var(--color-shadow-base);
+            border-radius: 0.75rem;
+            border: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .feature-tab-active {
+            background-color: var(--color-primary-yellow) !important;
+            color: var(--color-text-dark) !important;
+            font-weight: 700 !important;
+        }
+        .feature-tab-inactive {
+            background-color: var(--color-background-light) !important;
+            color: var(--color-text-dark) !important;
+            font-weight: 500 !important;
+        }
+
+        /* Device frame */
+        .feature-device-frame {
+            border-radius: 2rem;
+            width: 320px;
+            height: 640px;
+            border: 12px solid var(--color-text-dark);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            transform: rotateY(-8deg);
+            overflow: hidden;
+            transition: transform 0.5s ease;
+        }
+
+        .object-fit-cover {
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Sub-feature list default state */
+        .sub-feature-list {
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            padding-bottom: 0;
+            transition: all 0.5s ease-out;
+        }
+
+        /* Display cards */
+        .display-card {
+            background: var(--color-text-white);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--color-shadow-base);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .display-card-header {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(
+                135deg,
+                var(--color-primary-yellow) 0%,
+                var(--color-surface-light-yellow) 100%
+            );
+            position: relative;
+            overflow: hidden;
+        }
+
+        .display-card-header img {
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        /* Feature CTA buttons */
+        .feature-cta-button {
+            padding: 0.75rem 2rem;
+            background-color: var(--color-primary-yellow);
+            color: var(--color-secondary-green);
+            border: none;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        /* CTA section */
+        .cta-section {
+            position: relative;
+            background-image: url('bg/banner1.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+        .cta-overlay {
+            background-color: rgba(255, 255, 255, 0.7);
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Animation helpers */
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .animate-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* WhatsApp hover & chat text reveal */
+        .whatsapp-button:hover {
+        background-color: #128C7E !important;
+        transform: scale(1.05) !important;
+        }
+
+        .chat-text {
+        width: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: all 0.3s;
+        white-space: nowrap;
+        font-size: 1rem;
+        }
+
+        .whatsapp-button:hover .chat-text {
+        width: auto;
+        opacity: 1;
+        margin-left: 8px;
+        }
+        /* Scroll-to-top state */
+        .scroll-to-top.show {
+        display: flex !important;
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        }
+
+        /* ===========================
+           Responsive Font Guidelines
+           =========================== */
+
+        /* ≤ 1199px: large tablets & small laptops */
+        @media (max-width: 1199px) {
+            h1 { font-size: 2.7rem; }
+            h2 { font-size: 2.05rem; }
+            h3 { font-size: 1.4rem; }
+
+            p,
+            li {
+                font-size: 1.02rem;
+            }
+        }
+
+        /* ≤ 991px: tablets */
+        @media (max-width: 991px) {
+            html { font-size: 15.5px; }
+
+            h1 { font-size: 2.4rem; }
+            h2 { font-size: 1.95rem; }
+            h3 { font-size: 1.35rem; }
+
+            p,
+            li {
+                font-size: 1rem;
+            }
+
+            .feature-device-frame {
+                width: 280px;
+                height: 520px;
+            }
+        }
+
+        /* ≤ 767px: mobile */
+        @media (max-width: 767px) {
+            html { font-size: 15px; }
+
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.3rem; }
+
+            p,
+            li {
+                font-size: 0.98rem;
+            }
+
+            .feature-device-frame {
+                width: 260px;
+                height: 480px;
+            }
+        }
+
+        /* ≤ 575px: small mobile */
+        @media (max-width: 575px) {
+            html { font-size: 14.5px; }
+
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.6rem; }
+            h3 { font-size: 1.2rem; }
+
+            p,
+            li {
+                font-size: 0.96rem;
+            }
+
+            .feature-device-frame {
+                width: 250px;
+                height: 420px;
+            }
+        }
+
+        /* ≤ 400px: extra small */
+        @media (max-width: 400px) {
+            html { font-size: 14px; }
+
+            h1 { font-size: 1.6rem; }
+            h2 { font-size: 1.45rem; }
+
+            p,
+            li {
+                font-size: 0.94rem;
+            }
+        }
+
+        /* ≤ 320px: ultra-small */
+        @media (max-width: 320px) {
+            html { font-size: 13.5px; }
+
+            h1 { font-size: 1.45rem; }
+            h2 { font-size: 1.3rem; }
+
+            p,
+            li {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="head_content"></div>
+
+    <div class="container py-5">
+        <!-- MAIN SEO H1 -->
+        <div class="text-center mb-5">
+            <h1 class="fw-bold mb-3 text-brand-green">
+                Powerful Features for <span>Modern Teams</span>
+            </h1>
+            <p class="mx-auto fs-5 text-secondary max-w-700">
+                Discover how WorkinSite transforms workforce management with intuitive tools designed for
+                site managers, supervisors, and enterprise teams.
+            </p>
+        </div>
+
+        <!-- Feature Tabs -->
+        <div class="d-flex justify-content-center flex-wrap gap-2 mb-5">
+            <button
+                class="feature-tab feature-tab-active btn btn-sm px-4 py-2 me-1 mb-2"
+                data-target="site-management-section"
+                onclick="switchTab(this)">
+                Site Management
+            </button>
+            <button
+                class="feature-tab feature-tab-inactive btn btn-sm px-4 py-2 me-1 mb-2"
+                data-target="attendance-section"
+                onclick="switchTab(this)">
+                Attendance
+            </button>
+            <button
+                class="feature-tab feature-tab-inactive btn btn-sm px-4 py-2 me-1 mb-2"
+                data-target="reports-section"
+                onclick="switchTab(this)">
+                Reports
+            </button>
+        </div>
+
+        <!-- Site Management Section -->
+        <div class="feature-section" id="site-management-section" style="display: block;">
+            <div class="feature-content">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-6 order-lg-1 order-2">
+                        <div class="px-3">
+                            <div class="mb-3 display-5">🏗️</div>
+                            <h2 class="fw-bold mb-3 text-brand-green">
+                                Real-Time Site Status Overview
+                            </h2>
+                            <p class="text-dark mb-4">
+                                Monitor all your sites from a unified dashboard. Get instant visibility into site status,
+                                worker attendance, and operational metrics with real-time updates.
+                            </p>
+                            
+                            <ul class="list-unstyled mb-4">
+                                <li class="pb-3 border-bottom"
+                                    onmouseover="featureListHover(this, true)"
+                                    onmouseout="featureListHover(this, false)">
+                                    <div class="d-flex align-items-center gap-2 fw-semibold mb-1 text-brand-green">
+                                        <span>✓</span>
+                                        <span class="fs-6">Live Status Updates</span>
+                                    </div>
+                                    <div class="text-secondary fs-6">
+                                        Instant notifications when site conditions change
+                                    </div>
+                                </li>
+                                <li class="py-3 border-bottom"
+                                    onmouseover="featureListHover(this, true)"
+                                    onmouseout="featureListHover(this, false)">
+                                    <div class="d-flex align-items-center gap-2 fw-semibold mb-1 text-brand-green">
+                                        <span>✓</span>
+                                        <span class="fs-6">Performance Metrics</span>
+                                    </div>
+                                    <div class="text-secondary fs-6">
+                                        Track productivity and efficiency across all locations
+                                    </div>
+                                </li>
+                                <li class="pt-3"
+                                    onmouseover="featureListHover(this, true)"
+                                    onmouseout="featureListHover(this, false)">
+                                    <div class="d-flex align-items-center gap-2 fw-semibold mb-1 text-brand-green">
+                                        <span>✓</span>
+                                        <span class="fs-6">Multi-Site Management</span>
+                                    </div>
+                                    <div class="text-secondary fs-6">
+                                        Manage unlimited sites from one central interface
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <button
+                                data-target="site-sub-features"
+                                class="feature-cta-button btn btn-lg fw-bold"
+                                onclick="toggleDetails(this)">
+                                Show Details
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 order-lg-2 order-1">
+                        <div class="d-flex justify-content-center">
+                            <div class="feature-device-frame">
+                                <img src="images/site.jpg" alt="Site Management Interface"
+                                     class="w-100 h-100 object-fit-cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div
+                    id="site-sub-features"
+                    class="sub-feature-list mt-4 pt-4 border-top border-bottom">
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <div
+                                    class="d-inline-flex justify-content-center align-items-center mb-3 shadow-sm"
+                                    style="
+                                        width: 50px;
+                                        height: 50px;
+                                        background-color: #ffd700;
+                                        border-radius: 0.75rem;
+                                        font-size: 1.5rem;
+                                        color: var(--color-secondary-green);
+                                    ">
+                                    ✅
+                                </div>
+                                <h3 class="fs-6 fw-semibold mb-2 text-brand-green">
+                                    Real-Time Monitoring
+                                </h3>
+                                <p class="fs-6 text-dark mb-0">
+                                    Instant updates on site conditions, worker status, and project progress with automated alerts.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <div
+                                    class="d-inline-flex justify-content-center align-items-center mb-3 shadow-sm"
+                                    style="
+                                        width: 50px;
+                                        height: 50px;
+                                        background-color: #ffd700;
+                                        border-radius: 0.75rem;
+                                        font-size: 1.5rem;
+                                        color: var(--color-secondary-green);
+                                    ">
+                                    📈
+                                </div>
+                                <h3 class="fs-6 fw-semibold mb-2 text-brand-green">
+                                    Performance Analytics
+                                </h3>
+                                <p class="fs-6 text-dark mb-0">
+                                    Comprehensive metrics and KPIs to track productivity, efficiency, and operational excellence.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <div
+                                    class="d-inline-flex justify-content-center align-items-center mb-3 shadow-sm"
+                                    style="
+                                        width: 50px;
+                                        height: 50px;
+                                        background-color: #ffd700;
+                                        border-radius: 0.75rem;
+                                        font-size: 1.5rem;
+                                        color: var(--color-secondary-green);
+                                    ">
+                                    ℹ️
+                                </div>
+                                <h3 class="fs-6 fw-semibold mb-2 text-brand-green">
+                                    Smart Notifications
+                                </h3>
+                                <p class="fs-6 text-dark mb-0">
+                                    Intelligent alerts and notifications to keep you informed of critical events and changes.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Attendance Section -->
+        <div class="feature-section" id="attendance-section" style="display: none;">
+            <div class="feature-content">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-6 order-lg-1 order-2">
+                        <div class="px-3">
+                            <div class="mb-3 display-5">⏰</div>
+                            <h2 class="fw-bold mb-3 text-brand-green">
+                                Geo-Fenced & Facial Recognition Attendance
+                            </h2>
+                            <p class="text-dark mb-4">
+                                Ensure accuracy and prevent buddy-punching with advanced attendance tracking features.
+                                Workers can clock in/out only when they are within the site perimeter.
+                            </p>
+                            
+                            <ul class="list-unstyled mb-4">
+                                <li class="pb-3 border-bottom"
+                                    onmouseover="featureListHover(this, true)"
+                                    onmouseout="featureListHover(this, false)">
+                                    <div class="d-flex align-items-center gap-2 fw-semibold mb-1 text-brand-green">
+                                        <span>✓</span>
+                                        <span class="fs-6">Geo-Fencing</span>
+                                    </div>
+                                    <div class="text-secondary fs-6">
+                                        Define site boundaries for clock-in/out to confirm presence
+                                    </div>
+                                </li>
+                                <li class="py-3 border-bottom"
+                                    onmouseover="featureListHover(this, true)"
+                                    onmouseout="featureListHover(this, false)">
+                                    <div class="d-flex align-items-center gap-2 fw-semibold mb-1 text-brand-green">
+                                        <span>✓</span>
+                                        <span class="fs-6">Biometric Verification</span>
+                                    </div>
+                                    <div class="text-secondary fs-6">
+                                        Optional facial recognition for secure identity verification
+                                    </div>
+                                </li>
+                                <li class="pt-3"
+                                    onmouseover="featureListHover(this, true)"
+                                    onmouseout="featureListHover(this, false)">
+                                    <div class="d-flex align-items-center gap-2 fw-semibold mb-1 text-brand-green">
+                                        <span>✓</span>
+                                        <span class="fs-6">Automated Timesheets</span>
+                                    </div>
+                                    <div class="text-secondary fs-6">
+                                        Generate accurate timesheets for payroll instantly
+                                    </div>
+                                </li>
+                            </ul>
+                            <button
+                                data-target="attendance-sub-features"
+                                class="feature-cta-button btn btn-lg fw-bold"
+                                onclick="toggleDetails(this)">
+                                Show Details
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 order-lg-2 order-1">
+                        <div class="d-flex justify-content-center">
+                            <div class="feature-device-frame">
+                                <img src="images/attendance.jpg" alt="Attendance Tracking Interface"
+                                     class="w-100 h-100 object-fit-cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div
+                    id="attendance-sub-features"
+                    class="sub-feature-list mt-4 pt-4 border-top border-bottom">
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <div
+                                    class="d-inline-flex justify-content-center align-items-center mb-3 shadow-sm"
+                                    style="
+                                        width: 50px;
+                                        height: 50px;
+                                        background-color: #ffd700;
+                                        border-radius: 0.75rem;
+                                        font-size: 1.5rem;
+                                        color: var(--color-secondary-green);
+                                    ">
+                                    📍
+                                </div>
+                                <h3 class="fs-6 fw-semibold mb-2 text-brand-green">
+                                    GPS Validation
+                                </h3>
+                                <p class="fs-6 text-dark mb-0">
+                                    Verify worker location during clock-in and clock-out using precise GPS coordinates.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <div
+                                    class="d-inline-flex justify-content-center align-items-center mb-3 shadow-sm"
+                                    style="
+                                        width: 50px;
+                                        height: 50px;
+                                        background-color: #ffd700;
+                                        border-radius: 0.75rem;
+                                        font-size: 1.5rem;
+                                        color: var(--color-secondary-green);
+                                    ">
+                                    🗓️
+                                </div>
+                                <h3 class="fs-6 fw-semibold mb-2 text-brand-green">
+                                    Shift & Schedule Management
+                                </h3>
+                                <p class="fs-6 text-dark mb-0">
+                                    Easily assign shifts, manage time-off requests, and track planned vs. actual attendance.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <div
+                                    class="d-inline-flex justify-content-center align-items-center mb-3 shadow-sm"
+                                    style="
+                                        width: 50px;
+                                        height: 50px;
+                                        background-color: #ffd700;
+                                        border-radius: 0.75rem;
+                                        font-size: 1.5rem;
+                                        color: var(--color-secondary-green);
+                                    ">
+                                    💸
+                                </div>
+                                <h3 class="fs-6 fw-semibold mb-2 text-brand-green">
+                                    Overtime Calculation
+                                </h3>
+                                <p class="fs-6 text-dark mb-0">
+                                    Automatic calculation of standard and overtime hours based on local labor laws.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reports Section -->
+        <div class="feature-section" id="reports-section" style="display: none;">
+            <div class="feature-content">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-6 order-lg-1 order-2">
+                        <div class="px-3">
+                            <div class="mb-3 display-5">📊</div>
+                            <h2 class="fw-bold mb-3 text-brand-green">
+                                Advanced Reporting & Analytics
+                            </h2>
+                            <p class="text-dark mb-4">
+                                Turn raw operational data into actionable insights. Customizable reports help you optimize resource
+                                allocation, manage labor costs, and ensure compliance.
+                            </p>
+                            
+                            <ul class="list-unstyled mb-4">
+                                <li class="pb-3 border-bottom"
+                                    onmouseover="featureListHover(this, true)"
+                                    onmouseout="featureListHover(this, false)">
+                                    <div class="d-flex align-items-center gap-2 fw-semibold mb-1 text-brand-green">
+                                        <span>✓</span>
+                                        <span class="fs-6">Labor Cost Analysis</span>
+                                    </div>
+                                    <div class="text-secondary fs-6">
+                                        Detailed reports on hours worked vs. project budget
+                                    </div>
+                                </li>
+                                <li class="py-3 border-bottom"
+                                    onmouseover="featureListHover(this, true)"
+                                    onmouseout="featureListHover(this, false)">
+                                    <div class="d-flex align-items-center gap-2 fw-semibold mb-1 text-brand-green">
+                                        <span>✓</span>
+                                        <span class="fs-6">Compliance Audits</span>
+                                    </div>
+                                    <div class="text-secondary fs-6">
+                                        Generate logs for regulatory and safety compliance
+                                    </div>
+                                </li>
+                                <li class="pt-3"
+                                    onmouseover="featureListHover(this, true)"
+                                    onmouseout="featureListHover(this, false)">
+                                    <div class="d-flex align-items-center gap-2 fw-semibold mb-1 text-brand-green">
+                                        <span>✓</span>
+                                        <span class="fs-6">Custom Report Builder</span>
+                                    </div>
+                                    <div class="text-secondary fs-6">
+                                        Build and save your own critical performance dashboards
+                                    </div>
+                                </li>
+                            </ul>
+                            <button
+                                data-target="reports-sub-features"
+                                class="feature-cta-button btn btn-lg fw-bold"
+                                onclick="toggleDetails(this)">
+                                Show Details
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 order-lg-2 order-1">
+                        <div class="d-flex justify-content-center">
+                            <div class="feature-device-frame">
+                                <img src="images/report.jpg" alt="Reports Dashboard Interface"
+                                     class="w-100 h-100 object-fit-cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div
+                    id="reports-sub-features"
+                    class="sub-feature-list mt-4 pt-4 border-top border-bottom">
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <div
+                                    class="d-inline-flex justify-content-center align-items-center mb-3 shadow-sm"
+                                    style="
+                                        width: 50px;
+                                        height: 50px;
+                                        background-color: #ffd700;
+                                        border-radius: 0.75rem;
+                                        font-size: 1.5rem;
+                                        color: var(--color-secondary-green);
+                                    ">
+                                    📈
+                                </div>
+                                <h3 class="fs-6 fw-semibold mb-2 text-brand-green">
+                                    Trend Analysis
+                                </h3>
+                                <p class="fs-6 text-dark mb-0">
+                                    Identify long-term patterns in productivity, downtime, and resource usage over time.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <div
+                                    class="d-inline-flex justify-content-center align-items-center mb-3 shadow-sm"
+                                    style="
+                                        width: 50px;
+                                        height: 50px;
+                                        background-color: #ffd700;
+                                        border-radius: 0.75rem;
+                                        font-size: 1.5rem;
+                                        color: var(--color-secondary-green);
+                                    ">
+                                    💾
+                                </div>
+                                <h3 class="fs-6 fw-semibold mb-2 text-brand-green">
+                                    Data Export Options
+                                </h3>
+                                <p class="fs-6 text-dark mb-0">
+                                    Export all report data to common formats (CSV, PDF) for external analysis and archiving.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <div
+                                    class="d-inline-flex justify-content-center align-items-center mb-3 shadow-sm"
+                                    style="
+                                        width: 50px;
+                                        height: 50px;
+                                        background-color: #ffd700;
+                                        border-radius: 0.75rem;
+                                        font-size: 1.5rem;
+                                        color: var(--color-secondary-green);
+                                    ">
+                                    ✉️
+                                </div>
+                                <h3 class="fs-6 fw-semibold mb-2 text-brand-green">
+                                    Scheduled Delivery
+                                </h3>
+                                <p class="fs-6 text-dark mb-0">
+                                    Set up automatic email delivery for key reports to stakeholders daily or weekly.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div> <!-- /main container -->
+
+    <!-- Display cards section -->
+    <div class="container">
+        <div class="py-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold mb-3 text-brand-green">
+                    WorkInSite Features
+                </h2>
+                <p class="fs-6 text-secondary">
+                    Discover powerful tools designed to streamline your workflow
+                </p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Feature 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="display-card h-100">
+                        <div class="display-card-header d-flex align-items-center justify-content-center">
+                            <img
+                                src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=500&h=300&fit=crop"
+                                alt="Time Tracking"
+                                class="w-100 h-100">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="h5 fw-bold mb-3 text-brand-dark">
+                                Time Tracking
+                            </h3>
+                            <p class="fs-6 text-secondary mb-0">
+                                Effortlessly monitor work hours, project time, and team productivity with our intuitive time tracking system.
+                                Generate detailed reports and optimize your resource allocation.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="display-card h-100">
+                        <div class="display-card-header d-flex align-items-center justify-content-center">
+                            <img
+                                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=500&h=300&fit=crop"
+                                alt="Team Collaboration"
+                                class="w-100 h-100">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="h5 fw-bold mb-3 text-brand-dark">
+                                Team Collaboration
+                            </h3>
+                            <p class="fs-6 text-secondary mb-0">
+                                Enhance teamwork with real-time communication tools, shared workspaces, and collaborative project management
+                                features that keep everyone connected and aligned.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="display-card h-100">
+                        <div class="display-card-header d-flex align-items-center justify-content-center">
+                            <img
+                                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop"
+                                alt="Analytics Dashboard"
+                                class="w-100 h-100">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="h5 fw-bold mb-3 text-brand-dark">
+                                Analytics Dashboard
+                            </h3>
+                            <p class="fs-6 text-secondary mb-0">
+                                Gain valuable insights with comprehensive analytics and customizable dashboards.
+                                Track KPIs, monitor progress, and make data-driven decisions to grow your business.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <section class="cta-section py-5">
+        <div class="cta-overlay"></div>
+        <div class="container text-center py-5 cta-content">
+            <h2 class="fw-bold mb-3 text-brand-dark">
+                Ready to Transform Your Workplace?
+            </h2>
+            <p class="fs-5 mb-4 text-brand-dark max-w-600 mx-auto">
+                Join hundreds of organizations that trust WorkInsite to power their success
+            </p>
+            <a
+                href="index.html"
+                class="btn btn-lg fw-bold shadow px-4 py-3"
+                style="
+                    background-color: var(--color-primary-yellow);
+                    color: var(--color-secondary-green);
+                    border-radius: 50px;
+                    border: none;
+                    transition: all 0.3s ease;
+                    text-decoration: none;
+                ">
+                Get in Touch
+            </a>
+        </div>
+    </section>
+
+    <!-- Whatsapp Section -->
+    <a href="https://wa.me/YOUR_WHATSAPP_NUMBER"
+       class="whatsapp-button d-flex align-items-center position-fixed"
+       target="_blank"
+       style="bottom:20px;right:20px;background-color:#25D366;color:#ffffff;padding:15px;border-radius:50px;box-shadow:0 4px 8px rgba(0,0,0,0.2);text-decoration:none;font-size:1.5rem;z-index:998;transition:all 0.3s;">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+        <span class="chat-text">Chat with us!</span>
+    </a>
+
+    <button class="scroll-to-top d-none align-items-center justify-content-center position-fixed border-0 rounded-circle"
+            id="scrollToTopBtn" aria-label="Scroll to top"
+            style="bottom:90px;right:20px;width:50px;height:50px;background:var(--color-secondary-green);color:#ffffff;cursor:pointer;font-size:20px;box-shadow:0 4px 12px rgba(0,0,0,0.05);z-index:999;transition:all 0.3s ease;opacity:0;transform:translateY(20px);">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+    
+    <div id="foot_content"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Helper: reset & set tab styles with CSS classes
+        function resetTabStyles(button) {
+            button.classList.remove('feature-tab-active');
+            button.classList.add('feature-tab-inactive');
+        }
+
+        function setActiveTabStyles(button) {
+            button.classList.remove('feature-tab-inactive');
+            button.classList.add('feature-tab-active');
+        }
+
+        function switchTab(clickedTab) {
+            const targetId = clickedTab.getAttribute('data-target');
+
+            const tabs = document.querySelectorAll('.feature-tab');
+            tabs.forEach(t => resetTabStyles(t));
+            setActiveTabStyles(clickedTab);
+
+            const contentSections = document.querySelectorAll('.feature-section');
+            contentSections.forEach(section => {
+                section.style.display = 'none';
+                const content = section.querySelector('.feature-content');
+                if (content) {
+                    content.style.opacity = 0;
+                    content.style.transform = 'translateY(20px)';
+                    content.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                }
+                const detailButton = section.querySelector('.feature-cta-button');
+                const subFeatures = section.querySelector('.sub-feature-list');
+                if (detailButton) detailButton.textContent = 'Show Details';
+                if (subFeatures) {
+                    subFeatures.style.opacity = 0;
+                    subFeatures.style.maxHeight = '0';
+                    subFeatures.style.paddingBottom = '0';
+                }
+            });
+
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.style.display = 'block';
+                const content = targetSection.querySelector('.feature-content');
+                if (content) {
+                    requestAnimationFrame(() => {
+                        content.style.opacity = 1;
+                        content.style.transform = 'translateY(0)';
+                    });
+                }
+            }
+        }
+
+        function toggleDetails(clickedButton) {
+            const targetId = clickedButton.getAttribute('data-target');
+            const subFeatures = document.getElementById(targetId);
+            if (!subFeatures) return;
+
+            if (subFeatures.style.maxHeight && subFeatures.style.maxHeight !== '0px') {
+                subFeatures.style.opacity = 0;
+                subFeatures.style.maxHeight = '0';
+                subFeatures.style.paddingBottom = '0';
+                clickedButton.textContent = 'Show Details';
+            } else {
+                subFeatures.style.opacity = 1;
+                subFeatures.style.maxHeight = '1000px';
+                subFeatures.style.paddingBottom = '3rem';
+                clickedButton.textContent = 'Hide Details';
+            }
+        }
+
+        function featureListHover(li, isHover) {
+            if (isHover) {
+                li.classList.add('ps-3');
+                li.style.background = 'rgba(255, 215, 0, 0.05)';
+            } else {
+                li.classList.remove('ps-3');
+                li.style.background = 'transparent';
+            }
+        }
+
+        // Device frame hover & card interactions
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.feature-device-frame').forEach(frame => {
+                frame.addEventListener('mouseenter', () => {
+                    const width = window.innerWidth;
+                    if (width <= 1024) {
+                        frame.style.transform = 'translateY(-10px)';
+                    } else {
+                        frame.style.transform = 'rotateY(0deg) translateY(-10px)';
+                    }
+                });
+                frame.addEventListener('mouseleave', () => {
+                    const width = window.innerWidth;
+                    if (width <= 1024) {
+                        frame.style.transform = 'translateY(0)';
+                    } else {
+                        frame.style.transform = 'rotateY(-8deg)';
+                    }
+                });
+            });
+
+            // Tab hover
+            document.querySelectorAll('.feature-tab').forEach(tab => {
+                tab.addEventListener('mouseenter', () => {
+                    tab.style.transform = 'translateY(-2px)';
+                    tab.style.boxShadow = '0 4px 12px var(--color-shadow-base)';
+                });
+                tab.addEventListener('mouseleave', () => {
+                    tab.style.transform = 'translateY(0)';
+                    tab.style.boxShadow = '0 2px 8px var(--color-shadow-base)';
+                });
+            });
+
+            // CTA button hover
+            const brandBtn = document.querySelector('a.btn-lg');
+            if (brandBtn) {
+                brandBtn.addEventListener('mouseenter', () => {
+                    brandBtn.style.backgroundColor = '#e6c200';
+                    brandBtn.style.color = 'var(--color-secondary-green)';
+                    brandBtn.style.transform = 'translateY(-3px)';
+                    brandBtn.style.boxShadow = '0 10px 20px rgba(250, 212, 39, 0.4)';
+                });
+                brandBtn.addEventListener('mouseleave', () => {
+                    brandBtn.style.backgroundColor = 'rgb(250, 212, 39)';
+                    brandBtn.style.color = 'var(--color-secondary-green)';
+                    brandBtn.style.transform = 'translateY(0)';
+                    brandBtn.style.boxShadow = 'none';
+                });
+            }
+
+            // Feature CTA hover
+            document.querySelectorAll('.feature-cta-button').forEach(btn => {
+                btn.addEventListener('mouseenter', () => {
+                    btn.style.transform = 'translateY(-2px)';
+                    btn.style.boxShadow = '0 6px 20px rgba(255, 215, 0, 0.4)';
+                    btn.style.backgroundColor = 'var(--color-surface-light-yellow)';
+                });
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = 'translateY(0)';
+                    btn.style.boxShadow = '0 4px 12px rgba(255, 215, 0, 0.3)';
+                    btn.style.backgroundColor = 'var(--color-primary-yellow)';
+                });
+            });
+
+            // Display card hover
+            document.querySelectorAll('.display-card').forEach(card => {
+                const img = card.querySelector('img');
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-10px)';
+                    card.style.boxShadow = '0 15px 40px rgba(0, 0, 0, 0.1)';
+                    card.style.borderColor = 'var(--color-primary-yellow)';
+                    if (img) img.style.transform = 'scale(1.1)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                    card.style.boxShadow = '0 10px 30px var(--color-shadow-base)';
+                    card.style.borderColor = 'transparent';
+                    if (img) img.style.transform = 'scale(1)';
+                });
+            });
+        });
+
+            // ========== SCROLL TO TOP BUTTON ==========
+        (function () {
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+            if (!scrollToTopBtn) return;
+
+            function toggleScrollButton() {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('show');
+                } else {
+                    scrollToTopBtn.classList.remove('show');
+                }
+            }
+
+            function scrollToTop() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+
+            window.addEventListener('scroll', toggleScrollButton);
+            scrollToTopBtn.addEventListener('click', scrollToTop);
+
+            toggleScrollButton();
+        })();
+
+        // Load header and footer
+        $(document).ready(function() {
+            $('#head_content').load('header.html');
+            $('#foot_content').load('footer.html');
+        });
+    </script>
+</body>
+</html>
